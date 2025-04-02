@@ -47,7 +47,7 @@ venv\Scripts\activate      # Windows
 pip install -r requirements.txt
 ```
 > [!NOTE]
-> En el módulo de **User**, asegúrate de configurarlo con la tabla `User` respectiva de tu base de datos, ya que el módulo que se genera inicialmente solo contiene datos estáticos y no está conectado a ninguna
+> En el módulo **User**, asegúrate de configurarlo con la tabla `User` respectiva de tu base de datos, ya que el módulo que se genera inicialmente solo contiene datos estáticos y no está conectado a ninguna
 > base de datos. Esto es importante para asegurar el rendimiento del JWT en las rutas de los demás módulos.
 
 ## ⚙️ Configuraciones y Personalizaciones
