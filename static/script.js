@@ -1,3 +1,7 @@
+/**
+ * La función `createProject` envía una petición POST para generar un proyecto con un nombre dado, muestra
+ * mensajes de carga y alertas de éxito/error usando SweetAlert, y maneja los errores de conexión al servidor.
+ */
 function createProject() {
     let projectName = document.getElementById("project-name").value;
     let button = document.getElementById("Button-create");
@@ -56,6 +60,19 @@ function createProject() {
         });
 }
 
+/**
+ * La función `testDatabase` en JavaScript comprueba la información de conexión a la base de datos requerida, envía
+ * una solicitud POST para probar la conexión a la base de datos, y muestra el mensaje de resultado en consecuencia.
+ * La función `testDatabase()` devuelve un mensaje de éxito indicando que la conexión a la base de datos se ha realizado correctamente 
+ * o un mensaje de error si se ha producido algún problema durante la conexión.
+ * La función `testDatabase()` devuelve un mensaje de éxito indicando que la conexión a la base de datos es correcta o un 
+ * mensaje de error si hay algún problema durante la prueba de conexión a la base de datos.
+ * Los mensajes específicos que pueden ser devueltos son:
+ * - «Conexión exitosa a la base de datos». (Conexión exitosa a la base de datos)
+ * - «Error: [mensaje de error]» (Mensaje de error recibido del servidor)
+ * - «Error de conexión con el servidor» (Error de conexión con el servidor)
+ * - «Todos los campos son obligatorios» (Cuando no se han completado todos los campos requeridos)
+ */
 function testDatabase() {
     let message = document.getElementById("db-message");
 
@@ -105,6 +122,16 @@ function testDatabase() {
         });
 }
 
+/**
+ * La función `showTables` muestra una lista de tablas de una base de datos en una página web con casillas de verificación
+ * para la selección.
+ * @param tables - Un array de arrays, donde cada array interior representa una tabla de una base de datos. Cada
+ * contiene el nombre de la tabla como primer elemento y el primer atributo de la tabla como segundo elemento.
+ * segundo elemento.
+ * @returns Si el array `tables` está vacío, la función devolverá un mensaje diciendo «No hay tablas en
+ * la base de datos». De lo contrario, mostrará una lista de tablas con casillas de verificación junto a cada tabla
+ * nombre.
+ */
 function showTables(tables) {
     let tableContainer = document.getElementById("tables-list");
     tableContainer.innerHTML = "";
@@ -125,6 +152,10 @@ function showTables(tables) {
     document.getElementById("database-tables").style.display = "block";
 }
 
+/**
+ * La función `checks_all` gestiona la marcación y desmarcación de casillas de verificación en una tabla basada en una
+ * select-all checkbox.
+ */
 function checks_all() {
     const selectAllCheckbox = document.getElementById("select-all");
     const tableCheckboxes = document.querySelectorAll(".input-table");
@@ -146,6 +177,16 @@ function checks_all() {
     });
 }
 
+/**
+ * La función `tables_generate` selecciona las tablas seleccionadas, envía una petición POST para generar archivos 
+ * basados en las tablas seleccionadas y muestra mensajes de éxito y error usando SweetAlert.
+ * en las tablas seleccionadas, y muestra mensajes de éxito o error usando SweetAlert.
+ * @returns La función `tables_generate` devuelve un mensaje de alerta si no hay tablas seleccionadas o realiza una 
+ * petición POST para generar archivos basados en las tablas seleccionadas.
+ * Dependiendo de la respuesta del servidor, se mostrará un mensaje de éxito si los archivos se han 
+ * generado con éxito, un mensaje de error si hubo un problema generando los archivos, o un mensaje de advertencia
+ * mensaje de advertencia si hubo un error de conexión
+ */
 function tables_generate() {
     const tables = document.querySelectorAll(".input-table");
     const selectedTables = [];
@@ -206,6 +247,9 @@ function tables_generate() {
         });
 }
 
+/**
+ * La función `run` envía una petición POST a «/run_server» y desactiva un botón con id «Button-run»
+*/
 function run() {
     let button_server = document.getElementById("Button-run");
 
@@ -217,17 +261,27 @@ function run() {
 
 }
 
+/**
+ * La función `Project` oculta el elemento con el id «container-0-section» y muestra el elemento
+ * con el id «project-section».
+ */
 function Project() {
     document.getElementById("container-0-section").style.display = "none";
     document.getElementById("project-section").style.display = "block";
 }
 
 
+/**
+ * La función `Audit` oculta una sección y muestra otra sección en una página web.
+ */
 function Audit() {
     document.getElementById("container-0-section").style.display = "none";
     document.getElementById("database-section-audit").style.display = "flex";
 }
 
+/**
+ * La función alterna la visualización de dos secciones en función de su visibilidad actual.
+ */
 function back() {
     let project_section = document.getElementById("project-section")
     let database_section = document.getElementById("database-section-audit")
@@ -239,6 +293,16 @@ function back() {
     document.getElementById("container-0-section").style.display = "flex";
 }
 
+/**
+ * La función `testDatabaseAudit` en JavaScript envía una petición POST para probar una conexión a una base de datos
+ * y muestra el mensaje de resultado en consecuencia.
+ * @returns La función `testDatabaseAudit` devuelve una Promise. Esta Promise está manejando la
+ * La función envía una petición POST a la base de datos. La función envía una petición POST a
+ * «/test_db_audit» con las credenciales de la base de datos proporcionadas por el usuario. La respuesta del servidor
+ * servidor es procesada para mostrar un mensaje de éxito con información de la tabla si la prueba es
+ * con éxito, o un mensaje de error si hay un problema con la conexión. Si hay un error de conexión con el servidor,
+ * se muestra un mensaje de error de conexión.
+ */
 function testDatabaseAudit() {
     let message = document.getElementById("db-message-audit");
 
@@ -289,6 +353,16 @@ function testDatabaseAudit() {
         });
 }
 
+/**
+ * La función `showTablesAudit` muestra una lista de tablas con una opción para realizar una auditoría en cada una de ellas.
+ * tabla.
+ * @param tables - La función `showTablesAudit` toma un array de tablas como parámetro. Cada tabla
+ * en la matriz se representa como una matriz con dos elementos: el nombre de la tabla y el primer atributo de la tabla.
+ * de la tabla.
+ * @return La función `showTablesAudit` devuelve la lista de tablas con un botón «Auditoria» al lado de cada nombre de tabla.
+ * junto al nombre de cada tabla. El botón dispara la función `realizarAuditoria` con el nombre de la tabla * encriptada como parámetro cuando se pulsa.
+ * encriptada como parámetro.
+ */
 function showTablesAudit(tables) {
     const encryptedTableNames = {
         "extractos_bancarios": "t_bd0c503356edc5ba780920ee53000e4bae258e03852542f5562d6486ac3460f6",
@@ -373,6 +447,13 @@ function showTablesAudit(tables) {
     document.getElementById("database-tables-audit").style.display = "block";
 }
 
+/**
+ * La función `realizarAuditoria` realiza una auditoría enviando una petición POST con información de la base de datos.
+ * información de la base de datos, luego procesa los datos de respuesta para mostrar una tabla en un modal usando SweetAlert.
+ * @param encryptedName - El parámetro `encryptedName` de la función `realizarAuditoria` representa
+ * el nombre de la tabla que ha sido encriptada para propósitos de auditoría. Este nombre se utilizará como parte
+ * de la carga útil de la solicitud enviada al servidor cuando se generen tablas de auditoría.
+ */
 function realizarAuditoria(encryptedName) {
     let dbName = document.getElementById("db-audit").value;
     let user = document.getElementById("user-audit").value;

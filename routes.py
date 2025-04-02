@@ -16,10 +16,21 @@ proyect_name = ""
 
 @routes.route("/", methods=["GET"])
 def index():
+    """
+    La función `index` en una aplicación Python Flask sirve la plantilla `index.html` cuando se realiza una petición GET
+    a la ruta raíz.
+    :return: La función `index()` devuelve el resultado de renderizar la plantilla «index.html».
+    """
     return render_template("index.html")
 
 @routes.route("/generate_project", methods=["POST"])
 def set_project_name():
+    """
+    Esta función de Python establece el nombre del proyecto a partir de una solicitud POST, ejecuta un subproceso para crear un proyecto NestJS
+    utilizando un script por lotes, y devuelve mensajes de éxito o error en consecuencia.
+    :return: La función `set_project_name()` devuelve una respuesta JSON con un estado de éxito y un
+    mensaje basado en el resultado del proceso de generación del proyecto.
+    """
     global proyect_name
     try:
         data = request.json
@@ -70,6 +81,14 @@ def set_project_name():
 
 @routes.route("/test_db", methods=["POST"])
 def test_db():
+    """
+    Esta función Python prueba una conexión de base de datos, recupera tablas si tiene éxito, genera archivos Prisma
+    y devuelve una respuesta JSON con el estado de éxito, el mensaje y las tablas.
+    :return: El código devuelve una respuesta JSON con las claves «success», «message» y «tables» si
+    los archivos Prisma se han generado correctamente. Si se produce un error durante la generación de los archivos Prisma
+    devuelve una respuesta JSON con el valor False de «success» y un mensaje que indica un error inesperado.
+    inesperado.
+    """
     base_path = f"./nestjs/{proyect_name}/"
     app_path = f"./nestjs/{proyect_name}/src/app.module.ts"
     data = request.json
@@ -95,6 +114,15 @@ def test_db():
 
 @routes.route("/test_db_audit", methods=["POST"])
 def test_db_audit():
+    """
+    Esta función comprueba una conexión a una base de datos y recupera tablas basándose en las credenciales de la base de datos proporcionadas.
+    proporcionadas.
+    :return: La función `test_db_audit` devuelve una respuesta JSON con tres pares clave-valor:
+    «success» que indica si la prueba de conexión se ha realizado correctamente, “message” que proporciona un mensaje
+    relacionado con el éxito o el fracaso de la prueba de conexión, y «tables» que contiene una lista de tablas
+    si la prueba de conexión se ha realizado correctamente o una lista vacía en caso contrario. El código de estado HTTP devuelto
+    es 200 (OK) si la prueba de conexión es exitosa, o 500 (Error interno del servidor) si hay un error inesperado.
+    """
     data = request.json
     success, message = test_connection(
         data["db"], data["user"], data["password"], data["host"], data["port"]
@@ -111,6 +139,14 @@ def test_db_audit():
 
 @routes.route("/generate_audit_tables", methods=["POST"])
 def generate_audit_tables():
+    """
+    La función `generate_audit_tables` recibe datos JSON, llama a `get_audit_table` con los parámetros especificados y devuelve el resultado como respuesta JSON.
+    y devuelve el resultado como una respuesta JSON.
+    :return: La función `generate_audit_tables` devuelve una respuesta JSON con tres claves:
+    «success», “result”, y “message”. Los valores de estas claves se obtienen de la función
+    que se llama con los datos proporcionados en la solicitud POST. La respuesta
+    se devuelve con un código de estado 200.
+    """
     data = request.json
     success, result, message = get_audit_table(data["db"], data["user"], data["password"], data["host"], data["port"], data["table_name"])
     return jsonify({"success": success, "result": result, "message": message}), 200
@@ -118,6 +154,13 @@ def generate_audit_tables():
 
 @routes.route("/generate_tables", methods=["POST"])
 def generate_tables():
+    """
+    La función `generate_tables` crea archivos de controlador, módulo, servicio, usuario y autenticación basados en los datos de entrada del proyecto NestJS.
+    datos de entrada para un proyecto NestJS.
+    :return: La función `generate_tables()` devuelve una respuesta JSON con un estado de éxito y los datos de las tablas procesadas.
+    datos de las tablas que se procesaron. La respuesta incluye un código de estado 201 (Creado) si la
+    operación fue exitosa.
+    """
     global proyect_name
     data = request.json
     tables = data.get("tables", [])
@@ -190,6 +233,11 @@ def generate_tables():
 
 @routes.route("/run_server", methods=["POST"])
 def run_server():
+    """
+    La función `run_server` en este fragmento de código Python inicia un servidor para un proyecto usando el subproceso
+    y devuelve mensajes de éxito o error en consecuencia.
+    :return: La función `run_server` devuelve una respuesta JSON con un estado de éxito y un mensaje.
+    """
     global proyect_name
     try:
         if not proyect_name:
