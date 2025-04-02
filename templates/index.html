@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Base de Datos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="main-container">
+
+        <div class="container-0" id="container-0-section">
+            <h2>Automatizacion de proyectos</h2>
+            <div>
+                <button onclick="Project()" id="Button-project">Crear proyecto</button>
+                <button onclick="Audit()" id="Button-audit">Auditoria</button>
+            </div>
+        </div>
+
+        <!-- Sección 1: Crear Proyecto o Realizar auditoria a la base de datos-->
+        <div class="container-1" id="project-section" style="display: none;">
+            <h2 style="margin-bottom: 5px;">Generador de proyectos</h2>
+            <div class="input-group">
+                <input type="text" id="project-name" placeholder="Nombre del Proyecto">
+                <div class="buttons-sections">
+                    <button onclick="createProject()" id="Button-create">Crear Proyecto</button>
+                    <button onclick="back()" style="background-color: rgb(195, 194, 194);">Volver</button>
+                </div>
+            </div>
+            <p id="project-message" class="message" style="display: none;"></p>
+        </div>
+
+        <div class="container-1" id="audit-section" style="display: none;">
+            <h2 style="margin-bottom: 5px;">Auditoria de Base de datos</h2>
+            <h4 style="margin-bottom: 5px;">Ingresa tus credenciales:</h4>
+            <div class="input-group">
+                <div style="gap: 5px; display: flex; flex-direction: column;">
+                    <input type="email" name="email" id="email-input" placeholder="Ingresa tu correo electronico">
+                    <input type="password" name="password" id="password-input" placeholder="Ingresa tu contraseña">
+                </div>
+                <div class="buttons-sections">
+                    <button id="Button-create" onclick="verify()">Verificar</button>
+                    <button onclick="back()" style="background-color: rgb(195, 194, 194);">Volver</button>
+                </div>
+            </div>
+            <p id="project-message" class="message" style="display: none;"></p>
+        </div>
+
+        <!-- Sección 2: Conectar Base de Datos (Aparece solo si hay proyecto) -->
+        <div class="container-2" id="database-section" style="display: none;">
+            <div class="container-2-sub1">
+                <h2>Conectar Base de Datos</h2>
+                <div class="input-group">
+                    <input type="text" id="db" placeholder="Nombre de BD">
+                    <input type="text" id="user" placeholder="Usuario">
+                    <input type="password" id="password" placeholder="Contraseña">
+                    <input type="text" id="host" placeholder="Host">
+                    <input type="text" id="port" placeholder="Puerto">
+                    <button onclick="testDatabase()">Test</button>
+                </div>
+                <p id="db-message" class="message" style="display: none;"></p>
+            </div>
+
+            <!-- Sección 3: Tablas de la Base de Datos (Aparece solo si la conexión es exitosa) -->
+            <div class="container-2-sub2" id="database-tables" style="display: none;">
+                <h3>Tablas de la Base de Datos</h3>
+                <div
+                    style="display: flex; align-items: baseline;margin-top: -21px;margin-bottom: 10px;gap: 60px;justify-content: center;">
+                    <div class="table-options">
+                        <input type="checkbox" id="select-all" onchange="checks_all()"> <span
+                            style="margin-right: 30px;">Seleccionar_todas</span>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <button class="button_run" id="button_run" onclick="run()">Run_server</button>
+                    </div>
+                </div>
+                <div id="tables-list" class="table-container"></div>
+                <button onclick="tables_generate()">Generar</button>
+            </div>
+        </div>
+
+        <!-- Sección 4: Conectar Base de Datos (Aparece solo si hay una adutoria) -->
+        <div class="container-3" id="database-section-audit" style="display: none;">
+            <div class="container-2-sub1" id="form-db-audit">
+                <h2 style="margin-bottom: 5px;">Conectar Base de Datos</h2>
+                <div class="input-group">
+                    <input type="text" id="db-audit" placeholder="Nombre de BD">
+                    <input type="text" id="user-audit" placeholder="Usuario">
+                    <input type="password" id="password-audit" placeholder="Contraseña">
+                    <input type="text" id="host-audit" placeholder="Host">
+                    <input type="text" id="port-audit" placeholder="Puerto">
+                    <div class="buttons-sections">
+                        <button id="Button-create" onclick="testDatabaseAudit()">Test</button>
+                        <button onclick="back()" style="background-color: rgb(195, 194, 194);">Volver</button>
+                    </div>
+                </div>
+                <p id="db-message-audit" class="message" style="display: none;"></p>
+            </div>
+
+            <!-- Sección 3: Tablas de la Base de Datos (Aparece solo si la conexión es exitosa) -->
+            <div class="container-2-sub2" id="database-tables-audit" style="display: none;">
+                <h3>Tablas de la Base de Datos</h3>
+                <div id="tables-list-audit" class="table-container"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+
+</html>
