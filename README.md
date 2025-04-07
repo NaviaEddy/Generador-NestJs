@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/faa406c6-6a64-4d1b-ae3f-4ea6f27f155f)# 🛠️ Generador NestJs
+# 🛠️ Generador NestJs
 
 Generador NestJs es una aplicación web desarrollada en Python con Flask, diseñada para generar la estructura base de proyectos NestJS de forma automatizada.
 
@@ -90,7 +90,7 @@ http://127.0.0.1:5000
    ![image](https://github.com/user-attachments/assets/df4bada6-d9ee-476f-9246-38c96c4f7beb)
 10. Dale al boton Run_server, iniciara el servidor de tu proyecto!
     ![image](https://github.com/user-attachments/assets/ab60301a-9305-43cd-bd72-4fff7c012727)
-    Vista desde la consola de ejecucion
+    - Vista desde la consola de ejecucion
     ![image](https://github.com/user-attachments/assets/3690006d-c5e9-422a-8c1a-9dcb4ae08c42)
     > [!IMPORTANT]
     > Debes aceptar el procedimiento de las migraciones a la base de datos (Y/N) en la consola
